@@ -53,6 +53,8 @@ def buscar_palabra(palabra, url, conn):
             fecha = ""
 
         if palabra.lower() in descripcion or palabra in descripcion or palabra.upper() in descripcion :
+        #if palabra in descripcion :
+        
             print(palabra, "url encontrada:", url)
             insertar_resultado(palabra, url, descripcion, fecha, conn)
         else:

@@ -25,7 +25,7 @@ def conectar_base_de_datos():
 def insertar_resultado(palabra, url, descripcion, fecha, conn):
     try:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO result_data (palabra, url, descripcion, fecha) VALUES (%s, %s, %s, %s)",
+        cursor.execute("INSERT INTO resultados_juliacaJ (palabra, url, descripcion, fecha) VALUES (%s, %s, %s, %s)",
                        (palabra, url, descripcion, fecha))
         conn.commit()
         cursor.close()
@@ -52,7 +52,7 @@ def buscar_palabra(palabra, url, conn):
         else:
             fecha = ""
 
-        if palabra in descripcion:
+        if palabra.lower() in descripcion or palabra in descripcion or palabra.upper() in descripcion :
             print(palabra, "url encontrada:", url)
             insertar_resultado(palabra, url, descripcion, fecha, conn)
         else:
@@ -82,7 +82,7 @@ def explorar_enlaces(url_inicial, nivel_maximo, conn):
                     if enlace_url.startswith('http') and enlace_url not in enlaces_explorados:
                         cola.append((enlace_url, nivel_actual + 1))
                         enlaces_explorados.add(enlace_url)
-                        buscar_palabra("JULIACA", enlace_url, conn)
+                        buscar_palabra("Juliaca", enlace_url, conn)
 
 # Cambia los valores con tu configuración
 conn = conectar_base_de_datos()
